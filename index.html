@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Motocity Express</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      padding: 20px;
+    }
+    h1 {
+      color: #d62828;
+    }
+    form {
+      background-color: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      max-width: 400px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    input, button {
+      width: 100%;
+      margin-top: 10px;
+      padding: 10px;
+      font-size: 16px;
+    }
+    #mensagem {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Motocity Express</h1>
+  <p>Horário de funcionamento: <strong>14:30 às 22:00</strong></p>
+
+  <form id="formulario">
+    <label>Nome do Cliente:</label>
+    <input type="text" id="nome" required>
+
+    <label>Endereço de Coleta:</label>
+    <input type="text" id="coleta" required>
+
+    <label>Endereço de Entrega:</label>
+    <input type="text" id="entrega" required>
+
+    <button type="submit">Enviar Pedido</button>
+  </form>
+
+  <div id="mensagem"></div>
+
+  <script>
+    function estaDentroDoHorario() {
+      const agora = new Date();
+      const horaAtual = agora.getHours();
+      const minutoAtual = agora.getMinutes();
+      return (horaAtual > 14 || (horaAtual === 14 && minutoAtual >= 30)) && horaAtual < 22;
+    }
+
+    document.getElementById('formulario').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const nome = document.getElementById('nome').value;
+      const coleta = document.getElementById('coleta').value;
+      const entrega = document.getElementById('entrega').value;
+      const mensagemDiv = document.getElementById('mensagem');
+
+      if (estaDentroDoHorario()) {
+        const mensagem = `Olá! Pedido de ${nome}:\nColeta: ${coleta}\nEntrega: ${entrega}`;
+        const numero = '+5544999069779'; // Exemplo: 5581999999999 (55 + DDD + número)
+        const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
+
+        mensagemDiv.innerHTML = `Pedido dentro do horário!<br>Redirecionando para o WhatsApp...`;
+        window.open(url, '_blank');
+      } else {
+        mensagemDiv.innerHTML = `Olá, ${nome}. Infelizmente já encerramos por hoje.<br>
+        Atendemos novamente amanhã a partir das 14:30.`;
+      }
+    });
+  </script>
+
+</body>
+</html>
