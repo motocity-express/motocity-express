@@ -57,8 +57,7 @@
       const horaAtual = agora.getHours();
       const minutoAtual = agora.getMinutes();
       return (horaAtual > 14 || (horaAtual === 14 && minutoAtual >= 30)) && horaAtual < 22;
-    } 
-          
+    }
 
     document.getElementById('formulario').addEventListener('submit', function(event) {
       event.preventDefault();
@@ -70,7 +69,7 @@
 
       if (estaDentroDoHorario()) {
         const mensagem = `Olá! Pedido de ${nome}:\nColeta: ${coleta}\nEntrega: ${entrega}`;
-        const numero = '+5544999069779'; // Exemplo: 5581999999999 (55 + DDD + número)
+        const numero = '+5544999069779';
         const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
 
         mensagemDiv.innerHTML = `Pedido dentro do horário!<br>Redirecionando para o WhatsApp...`;
