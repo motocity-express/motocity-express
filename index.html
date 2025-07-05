@@ -57,8 +57,8 @@
       const horaAtual = agora.getHours();
       const minutoAtual = agora.getMinutes();
       return (horaAtual > 14 || (horaAtual === 14 && minutoAtual >= 30)) && horaAtual < 22;
-    } else if (dia === 6) {
-                dentroHorario = (horaDecimal >= 10 && horaDecimal <= 18);
+    } 
+          
 
     document.getElementById('formulario').addEventListener('submit', function(event) {
       event.preventDefault();
